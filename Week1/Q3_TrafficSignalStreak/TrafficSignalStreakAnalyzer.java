@@ -1,0 +1,44 @@
+public class TrafficSignalStreakAnalyzer {
+
+    public static void findLongestStreak(String signalLog) {
+        if (signalLog == null || signalLog.isEmpty()) {
+            System.out.println("Signal log is empty - nothing to analyze.");
+            return;
+        }
+
+        char longestColor = signalLog.charAt(0);
+        int longestLength = 1;
+
+        char currentColor = signalLog.charAt(0);
+        int currentLength = 1;
+
+        for (int i = 1; i < signalLog.length(); i++) {
+            if (signalLog.charAt(i) == currentColor) {
+                currentLength++;
+            } else {
+                currentColor = signalLog.charAt(i);
+                currentLength = 1;
+            }
+
+            if (currentLength > longestLength) {
+                longestLength = currentLength;
+                longestColor = currentColor;
+            }
+        }
+
+        System.out.println("Longest Streak: '" + longestColor
+                + "' repeated " + longestLength + " times");
+    }
+
+    private static void analyze(String log) {
+        System.out.println("Signal Log: \"" + log + "\"");
+        findLongestStreak(log);
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        analyze("RRGGGYRR");
+        analyze("RRRRYYGG");
+        analyze("RYGRYGRYG");
+    }
+}
